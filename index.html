@@ -10,6 +10,14 @@
 
   <header class="header">
     <h2 class="header__logo">Programming News</h2>
+
+    <nav class="active">
+      <ul>
+        <li class="nav-li"><a href="#middle">Our courses</a></li>
+        <li class="nav-li"><a href="#bottom">Our social media</a></li>
+      </ul>
+    </nav>
+
     <div class="header__links">
       <div class="links__auth">
         <img src="assets/pics/header/join.svg" class="links__img">
@@ -21,9 +29,13 @@
         <p>Help</p>
       </div>
     </div>
+    <div class="burger-wrapper" class="active">
+      <button class="burger">
+      </button>
+    </div>
   </header>
 
-  <div class="main">
+  <div class="main" id="middle">
     <div class="banner">
       <div class="banner__text">
         <h1 class="banner__headding">Stay Ahead of the <br>Curve with Our <br>Exclusive Courses!</h1> 
@@ -96,7 +108,7 @@
     </div>
   </div>
 
-  <footer class="footer">
+  <footer id ="bottom" class="footer">
     <div class="links">
       <div class="links__section">
         <p class="section__title">Trending Topics</p>

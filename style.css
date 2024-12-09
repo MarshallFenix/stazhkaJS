@@ -145,3 +145,88 @@ html {
     cursor: pointer;
   }
 }
+.burger-wrapper {
+  position:relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.burger {
+  position: relative;
+  border: 0;
+  outline: none;
+  display: none;
+  height: 3px;
+  width: 50px;
+  background-color: black;
+  cursor: pointer;
+  z-index: 100;
+}
+.burger::before {
+  content: "";
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  background-color: black;
+  left: 0;
+  top: -10px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 100;
+}
+.burger::after {
+  content: "";
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  background-color: black;
+  left: 0;
+  top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 100;
+}
+.burger.active {
+  height: 0;
+}
+
+.burger.active::before {
+  transform: rotate(-45deg) ;
+  top: 0;
+}
+.burger.active::after {
+  transform: rotate (45deg) ;
+  top: 0;
+}
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+  nav {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #fade70;
+    width: 80%;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: all 0.5s;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+  nav ul li {
+    width: 50%;
+  }
+  nav.active {
+    display: block;
+    transform: translateX(0);
+    transition: all 0.5s;
+  }
+  
+}
