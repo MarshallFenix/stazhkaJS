@@ -5,6 +5,22 @@
   /* outline: 1px solid red; */
 }
 
+/* same as html */
+:root {
+  /* set css custom proprties(same as variables) */
+  --bar-width: 80px;
+  --bar-height: 10px;
+  --hamburger-gap: 6px;
+  --hamburger-margin: 1rem;
+  --foreground: #333;
+  --background: #eee;
+  /* we calculate width of bar when burger in x position */
+  /* we multiply length by cos(45deg) */
+  --transition-timing: 200ms ease-in-out;
+  /* cacl() — calculates what inside of it */
+  --hamburger-height: calc(3*var(--bar-height) + 2*var(--hamburger-gap));
+}
+
 html {
   box-sizing: border-box;
   width: 100%;
@@ -35,9 +51,110 @@ html {
   font-size: 1.2rem;
   &:hover { cursor: pointer; }
 }
+.links__auth-show { visibility: visible; }
 .links__img {
   width: 2rem;
 }
+/* Hamburger menu start */
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height) * 1.414213562);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap); /* this is how css custom property is used */
+  width: max-content;
+  position: absolute;
+  top: var(--hamburger-margin);
+  right: var(--hamburger-margin);
+  z-index: 2;
+  cursor: pointer;
+}
+.hamburger-menu:has(input:checked) {
+  --foreground: #eee;
+  --background: #333;
+}
+.hamburger-menu:has(input:focus-visible)::before,
+.hamburger-menu:has(input:focus-visible)::after,
+.hamburger-menu:has(input:focus-visible) input {
+  border: 1px solid var(--background);
+  box-shadow: 0 0 0 1px var(--foreground);
+}
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--foreground);
+  transform-origin: left center; 
+  cursor: pointer;
+  transition: rotate var(--transition-timing), width var(--transition-timing),
+              translate var(--transition-timing),
+              opacity var(--transition-timing),
+              background-color var(--transition-timing);
+}
+.hamburger-menu input {
+  appearance: none;
+  outline: none;
+}
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+/* if input:checked in .hamburger-menu we select hamburger-menu::before*/
+.hamburger-menu:has(input:checked)::before {
+  /* these lines are required to make X, because width becomes smaller */
+  /* decrease width and move bars a bit in opposite directions */
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / -2);
+}
+.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height) / 2);
+}
+
+.sidebar {
+  transition: translate var(--transition-timing);
+  --sidebar-width: 300px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: .5rem 1rem;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
+  padding-right: calc(2*var(--hamburger-margin));
+  min-height: 100vh;
+  color: var(--background);
+  background-color: var(--foreground);
+  width: var(--sidebar-width);
+  translate: 110%;
+}
+.hamburger-menu:has(input:checked) + .sidebar {
+  translate: 0;
+}
+
+.hamburger-hide {
+  visibility: hidden;
+}
+@media (max-width: 768px) {
+  .hamburger-show { visibility: visible; }
+  .links__auth-hide { visibility: hidden; }
+}
+/* Hamburger menu end */
+ul {
+  padding-left: .4rem;
+}
+.nav-li {
+  list-style-type: none;
+  padding-bottom: .6rem;
+}
+.nav-li a {
+  font-size: larger;
+  &:visited {
+    color: #eee;
+  }
+}
+
 
 
 .banner {
@@ -130,103 +247,16 @@ html {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  &:hover { cursor: pointer; }
+  cursor: pointer;
 }
 .section__title {
   padding-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: 700;
-  &:hover { cursor: text; }
+  cursor: text;
 }
 
 .socials > * {
   padding: .4rem;
-  &:hover {
-    cursor: pointer;
-  }
-}
-.burger-wrapper {
-  position:relative;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-}
-.burger {
-  position: relative;
-  border: 0;
-  outline: none;
-  display: none;
-  height: 3px;
-  width: 50px;
-  background-color: black;
-  cursor: pointer;
-  z-index: 100;
-}
-.burger::before {
-  content: "";
-  height: 4px;
-  width: 50px;
-  position: absolute;
-  background-color: black;
-  left: 0;
-  top: -10px;
-  cursor: pointer;
-  transition: 0.3s;
-  z-index: 100;
-}
-.burger::after {
-  content: "";
-  height: 4px;
-  width: 50px;
-  position: absolute;
-  background-color: black;
-  left: 0;
-  top: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  z-index: 100;
-}
-.burger.active {
-  height: 0;
-}
-
-.burger.active::before {
-  transform: rotate(-45deg) ;
-  top: 0;
-}
-.burger.active::after {
-  transform: rotate (45deg) ;
-  top: 0;
-}
-@media (max-width: 768px) {
-  .burger {
-    display: block;
-  }
-  nav {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    background-color: #fade70;
-    width: 80%;
-    height: 100vh;
-    transform: translateX(100%);
-    transition: all 0.5s;
-  }
-  nav ul {
-    display: flex;
-    flex-direction: column;
-  }
-  nav ul li {
-    width: 50%;
-  }
-  nav.active {
-    display: block;
-    transform: translateX(0);
-    transition: all 0.5s;
-  }
-  
 }
