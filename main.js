@@ -1,15 +1,22 @@
-const burgerWrapper = document.querySelector(".burger-wrapper");
 
-burgerWrapper.addEventListener("click", () => {
-  document.querySelector(".burger").classList.toggle("active");
-  document.querySelector("nav").classList.toggle("active");
-});
+
+
+
+// Бургер-меню
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+
+if (hamburgerMenu) {
+  hamburgerMenu.addEventListener('click', () => {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('active');
+  });
+}
 
 const allNavLi = document.querySelectorAll("nav ul li");
 
 allNavLi.forEach((elem) => {
   elem.addEventListener("click", () => {
-    document.querySelector(".burger").classList.remove("active");
-    document.querySelector("nav").classList.remove("active");
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.remove('active');
   });
 });

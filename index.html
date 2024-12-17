@@ -11,41 +11,45 @@
   <header class="header">
     <h2 class="header__logo">Programming News</h2>
     <div class="header__links">
-      <div class="links__auth">
-        <img src="assets/pics/header/join.svg" class="links__img">
-        <p>Join</p>
+      
+      <div class="links__auth" id="signInBtn">
+        <img src="assets/pics/header/join.svg" class="links__img" alt="Sign In">
         <p>Sign In</p>
       </div>
-      <div class="links__auth links__auth-hide links__auth-show">
-        <img src="assets/pics/header/help.svg">
+      
+
+
+      <div class="links__auth links__auth-hide links__auth-show" id="help">
+        <img src="assets/pics/header/help.svg" alt="help">
         <p>Help</p>
-      </div>
+    </div>
     </div>
 
     <label class="hamburger-menu hamburger-hide hamburger-show">
-      <input type="checkbox">
+        <input type="checkbox">
     </label>
     <aside class="sidebar">
-      <nav>
-        <ul>
-          <li class="nav-li"><a href="#middle">Our courses</a></li>
-          <li class="nav-li"><a href="#bottom">Our social media</a></li>
-        </ul>
-      </nav>
+        <nav>
+            <ul>
+                <li class="nav-li"><a href="#middle">Our courses</a></li>
+                <li class="nav-li"><a href="#bottom">Our social media</a></li>
+            </ul>
+        </nav>
     </aside>
-  </header>
+</header>
+
 
   <div class="main" id="middle">
     <div class="banner">
       <div class="banner__text">
         <h1 class="banner__headding">Stay Ahead of the <br>Curve with Our <br>Exclusive Courses!</h1> 
-        <button class="banner__button">SHOP SALE</button>
+        <button class="banner__button" id="shop_sale_button">SHOP SALE</button>
       </div>
     </div>
     <h1 class="courses__h1">Courses</h1>
     <div class="courses">
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/Web_development.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">Web Development Basics</h3>
           <p class="course__description">Learn the fundamentals of web development, including HTML, CSS, and JavaScript.</p>
@@ -54,7 +58,7 @@
       </div>
       
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/Advanced_CSS.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">Advanced CSS Techniques</h3>
           <p class="course__description">Master advanced CSS, including animations, grid layouts, and responsive design.</p>
@@ -63,7 +67,7 @@
       </div>
       
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/js_beginners.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">JavaScript for Beginners</h3>
           <p class="course__description">Understand the basics of JavaScript programming, from variables to functions.</p>
@@ -72,7 +76,7 @@
       </div>
       
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/React.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">React.js Essentials</h3>
           <p class="course__description">Dive into React.js and learn how to build dynamic and interactive web applications.</p>
@@ -81,7 +85,7 @@
       </div>
       
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/python.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">Python Programming</h3>
           <p class="course__description">Get started with Python and explore concepts like data types, loops, and file handling.</p>
@@ -89,7 +93,7 @@
         <p class="course__price">$24.99</p>
       </div>
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/full_stack.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">Full Stack Development</h3>
           <p class="course__description">Learn both front-end and back-end technologies to become a full-stack developer.</p>
@@ -98,7 +102,7 @@
       </div>
       
       <div class="course">
-        <img src="assets/pics/main/placeholder.jpg" class="course__img">
+        <img src="assets/pics/main/Data_science.jpeg" class="course__img">
         <div class="course__info">
           <h3 class="course__name">Data Science with Python</h3>
           <p class="course__description">Explore the world of data science, including data analysis, visualization, and machine learning with Python.</p>
@@ -139,5 +143,136 @@
       <img src="assets/pics/footer/twitter.svg">
     </div>
   </footer>
+  
+  <div id="loginModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <button type="submit" id="login_button_form">Login</button>
+      </form>
+  </div>
+</div>
+
+<div id="apiResults" class="api-results"></div>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+//обработчик для кнопки логин Login в форме 
+document.addEventListener('DOMContentLoaded', function() {
+  // Находим элемент "Help"
+  const helpBtn = document.getElementById('login_button_form');
+
+  if (helpBtn) {
+    // Добавляем обработчик клика
+    helpBtn.addEventListener('click', () => {
+      alert('Советую заглянуть в низ страницы');
+    });
+  }
+});
+//обработчик для блока Help
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const helpBtn = document.getElementById('help');
+
+  if (helpBtn) {
+    
+    helpBtn.addEventListener('click', () => {
+      alert('How can we help you? For support, contact our team.');
+    });
+  }
+});
+//обработчик для кнопки Shop Sale
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const helpBtn = document.getElementById('shop_sale_button');
+
+  if (helpBtn) {
+    
+    helpBtn.addEventListener('click', () => {
+      alert('Offer will be added soon');
+    });
+  }
+});
+document.addEventListener('DOMContentLoaded', function() {
+  const signInBtn = document.getElementById('signInBtn');
+  const modal = document.getElementById('loginModal');
+  const closeBtn = document.querySelector('.close');
+  const loginForm = document.getElementById('loginForm');
+
+  if (!signInBtn || !modal || !closeBtn) {
+      console.error('One or more elements not found');
+      return;
+  }
+
+  // Открытие модального окна
+  signInBtn.addEventListener('click', () => {
+      console.log('Sign In clicked'); 
+      modal.style.display = 'flex';
+  });
+
+  // Закрытие модального окна при клике на крестик
+  closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+  });
+
+  // Закрытие модального окна при клике вне его
+  window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+  });
+});
+
+//username-password
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    console.log(`Username: ${username}, Password: ${password}`);
+
+    try {
+      
+      const response = await fetch('https://rickandmortyapi.com/api/character');
+      const data = await response.json();
+
+      const resultsContainer = document.getElementById('apiResults');
+      resultsContainer.innerHTML = '';
+
+      data.results.forEach(character => {
+        const card = document.createElement('div');
+        card.className = 'character-card';
+        card.innerHTML = `
+          <img src="${character.image}" alt="${character.name}">
+          <p><strong>${character.name}</strong></p>
+          <p>Species: ${character.species}</p>
+        `;
+        resultsContainer.appendChild(card);
+      });
+
+      modal.style.display = 'none';
+
+    } catch (error) {
+      console.error('Failed to fetch data from API', error);
+    }
+  });
+
+
+</script>
 </body>
 </html>

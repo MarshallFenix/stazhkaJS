@@ -1,5 +1,6 @@
 *, *::before, *::after {
   margin: 0;
+  padding: 0;
   box-sizing: inherit;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   /* outline: 1px solid red; */
@@ -30,6 +31,7 @@ html {
 .header {
   display: flex;
   justify-content: space-between;
+  
   position: sticky;
   top: 0;
   left: 0;
@@ -44,25 +46,133 @@ html {
 .header__logo {
   &:hover { cursor: pointer; }
 }
+
 .links__auth {
   display: flex;
   align-items: center;
   gap: .6rem;
   font-size: 1.2rem;
-  &:hover { cursor: pointer; }
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: 2px solid;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
 }
-.links__auth-show { visibility: visible; }
+
+.links__auth:hover {
+  background-color: #3e3e3e;
+  color: gold;
+}
+
+.links__auth-show {
+  visibility: visible;
+}
+
 .links__img {
   width: 2rem;
 }
+/* для всплывающего окна*/
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close:hover {
+  color: #000;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.modal input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.modal button {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+.modal button:hover {
+  background-color: #444;
+}
+
+
+/* для api */
+.api-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+.character-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.character-card {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  text-align: center;
+  border-radius: 8px;
+}
+
 /* Hamburger menu start */
 .hamburger-menu {
   --x-width: calc(var(--hamburger-height) * 1.414213562);
   display: flex;
   flex-direction: column;
-  gap: var(--hamburger-gap); /* this is how css custom property is used */
+  gap: var(--hamburger-gap);
   width: max-content;
   position: absolute;
+  margin-top: 20px;
   top: var(--hamburger-margin);
   right: var(--hamburger-margin);
   z-index: 2;
@@ -74,10 +184,12 @@ html {
 }
 .hamburger-menu:has(input:focus-visible)::before,
 .hamburger-menu:has(input:focus-visible)::after,
+
 .hamburger-menu:has(input:focus-visible) input {
   border: 1px solid var(--background);
   box-shadow: 0 0 0 1px var(--foreground);
 }
+
 .hamburger-menu::before,
 .hamburger-menu::after,
 .hamburger-menu input {
@@ -213,6 +325,7 @@ ul {
 }
 .course__img {
   width: 100%;
+  height: 100%;
   padding-bottom: .8rem;
 }
 .course__info {
